@@ -1,0 +1,24 @@
+{
+  "name": "h_assessment_structure",
+  "version": "1.0.0",
+  "description": "JS console-based interactive game",
+  "homepage": "https://github.com/KelvinSu1983/findmyhat#readme",
+  "bugs": {
+    "url": "https://github.com/KelvinSu1983/findmyhat/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KelvinSu1983/findmyhat.git"
+  },
+  "license": "ISC",
+  "author": "Kelvin",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
