@@ -32,7 +32,7 @@ const QUIT_MSG = "You quit the game, thank you for playing.";
 
 // TODO: MAP ROWS, COLUMNS AND PERCENTAGE
 const ROWS = 8;
-const COLS = 5;
+const COLS = 8;
 const PERCENT = 0.2;
 
 
@@ -44,6 +44,8 @@ class Field {
   constructor(field = [[]]) {
     this.field = field;
     this.gameplay = false;
+    this.x = 0; //for tracking x(horizontal) position of player on map
+    this.y = 0; //for tracking y(Vertical) position of player on map
   }
   // TODO: generateField is a static method, returning a 2D array of the fields
 
@@ -89,7 +91,7 @@ class Field {
       // 3. Whether the player moved to the hat, wins the game
       // 4. Whether the player moved to grass spot, continue the game
       // Update position of the player on the map
-    /*
+    
     // 1. Check if out of bounds
     if (this.y < 0 || this.y >= ROWS || this.x < 0 || this.x >= COLS) {
       console.log(OUT_MSG);
@@ -111,9 +113,9 @@ class Field {
       return;
     }
 
-    // 4. Otherwise, continue game and update map
+    // 4. Update the map with the player's new position
     this.field[this.y][this.x] = PLAYER;
-  */     
+
   }
 
     // * start() a public method of the class to start the game
@@ -130,17 +132,24 @@ class Field {
       let flagInvalid = false; //use a flag to determine if the game entry is correct
       let feedback = "";
 
+      const oldX = this.x;
+      const oldY = this.y;
+
       switch (input.toUpperCase()) {
         case UP:
+          this.y -= 1;
           feedback = FEEDBACK_UP;
           break;
         case DOWN:
+          this.y += 1;
           feedback = FEEDBACK_DOWN;
           break;
         case LEFT:
+          this.x -= 1;
           feedback = FEEDBACK_LEFT;
           break;
         case RIGHT:
+          this.x += 1;
           feedback = FEEDBACK_RIGHT;
           break;
         case QUIT:
@@ -156,6 +165,10 @@ class Field {
       this.updateMove(feedback);
 
       if (!flagInvalid){     // flagInvalid is a boolean
+        //replace previous position with GRASS
+        if (this.field[oldY] && this.field[oldY][oldX] === PLAYER){
+          this.field[oldY][oldX] = GRASS;
+        }
         //update the gameplay
         this.updateGame();
       }
